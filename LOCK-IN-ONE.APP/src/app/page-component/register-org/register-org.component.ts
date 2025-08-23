@@ -53,6 +53,9 @@ export class RegisterOrgComponent implements OnInit {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
+  thirdFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
 
   onStepChange(event: StepperSelectionEvent): void {
     this.selectedStepIndex = event.selectedIndex;
@@ -62,12 +65,9 @@ export class RegisterOrgComponent implements OnInit {
   UpdateApplications() {
     const count = this.application_count || 0;
 
-    // Resize the array to match the count
     if (count > this.applications.length) {
-      // Add empty strings if count increased
       this.applications.push(...Array(count - this.applications.length).fill(''));
     } else if (count < this.applications.length) {
-      // Remove extra elements if count decreased
       this.applications.splice(count);
     }
   }

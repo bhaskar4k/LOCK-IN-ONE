@@ -55,7 +55,7 @@
                         <div class="col-md-6"></div>
                     </div>
 
-                    <hr>
+                    <hr *ngIf="application_count!== null && application_count > 0">
 
                     <div class="row">
                         <div class="col-md-6 mb-2" *ngFor="let app of applications; let i = index">
@@ -70,6 +70,46 @@
                         <div class="d-flex justify-content-around">
                             <button class="btn btn-secondary btn-sm me-2" matStepperPrevious>Back</button>
                             <button class="btn btn-secondary btn-sm" matStepperNext>Next</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+
+
+            <!-- Step 3 -->
+            <mat-step [stepControl]="thirdFormGroup">
+                <form [formGroup]="thirdFormGroup">
+                    <ng-template matStepLabel>
+                        <span [ngClass]="{ 'selected-step-label': selectedStepIndex === 2 }">Payload's
+                            Details</span>
+                    </ng-template>
+
+                    <div class="row mb-3">
+                        <div class="form-group mb-2 col-md-6">
+                            <label class="mb-1">Application Count<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" placeholder="Enter the number of applications..."
+                                [(ngModel)]="application_count" [ngModelOptions]="{standalone: true}"
+                                (ngModelChange)="UpdateApplications()">
+                        </div>
+
+                        <div class="col-md-6"></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2" *ngFor="let app of applications; let i = index">
+                            <label>Application {{ i + 1 }} URL<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="applications[i]"
+                                [ngModelOptions]="{standalone: true}" placeholder="Enter URL..." />
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <div class="d-flex justify-content-around">
+                            <button class="btn btn-secondary btn-sm me-2" matStepperPrevious>Back</button>
+                            <button class="btn btn-primary btn-sm">Save</button>
                         </div>
                     </div>
                 </form>
