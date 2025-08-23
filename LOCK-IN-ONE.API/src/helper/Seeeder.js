@@ -1,15 +1,11 @@
-import Enums from '../entity/Enum.model.js';
+import SeedEnum from '../seeders/Enum.seeder.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 const RunSeeders = async () => {
     try {
-        const newEnums = new Enums({
-            enum_name: 'ENUMS',
-            enum_value: 'ENUMS',
-        });
-        await newEnums.save();
+        await SeedEnum();
     } catch (error) {
         console.log("Seeder error:", error);
         process.exit(1);

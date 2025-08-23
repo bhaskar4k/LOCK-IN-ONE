@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import EnumsConstants from '../common-constants/Enum.constant.js';
+
+const { DATA_STATUS } = EnumsConstants;
 
 const enumsSchema = new mongoose.Schema({
     enum_name: {
@@ -6,16 +9,16 @@ const enumsSchema = new mongoose.Schema({
         required: true
     },
     enum_value: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: true,
     },
-    // data_status: {
-    //     type: String,
-    //     enum: Object.values(ENUMS.DATA_STATUS),
-    //     default: ENUMS.DATA_STATUS.ACTIVE,
-    // }
-  });
+    data_status: {
+        type: String,
+        enum: Object.values(DATA_STATUS),
+        default: DATA_STATUS.ACTIVE
+    }
+});
 
-const Enums =  mongoose.model('enums', enumsSchema);
+const Enums = mongoose.model('enums', enumsSchema);
 
 export default Enums;

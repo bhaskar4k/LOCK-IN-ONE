@@ -1,4 +1,6 @@
 import express from 'express';
+import clear from 'clear'
+
 import ConnectDB from './src/helper/DB.js';
 import RunSeeders from './src/helper/Seeeder.js';
 
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 
 // Start Server
 app.listen(PORT, async () => {
+  clear();
   await ConnectDB();
   await RunSeeders();
   console.log(`API Server is running at http://localhost:${PORT}`);
