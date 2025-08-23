@@ -1,5 +1,6 @@
 import express from 'express';
 import ConnectDB from './src/helper/DB.js';
+import RunSeeders from './src/helper/Seeeder.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,5 +19,6 @@ app.get('/', (req, res) => {
 // Start Server
 app.listen(PORT, async () => {
   await ConnectDB();
+  await RunSeeders();
   console.log(`API Server is running at http://localhost:${PORT}`);
 });
