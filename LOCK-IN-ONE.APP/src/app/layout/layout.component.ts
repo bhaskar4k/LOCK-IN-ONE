@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -7,6 +7,20 @@ import { RouterModule } from '@angular/router';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
+  isDarkMode = false;
 
+  ngOnInit(): void {
+    // Load saved theme if exists
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.setAttribute('data-bs-theme', savedTheme);
+    this.isDarkMode = savedTheme === 'dark';
+  }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    const newTheme = this.isDarkMode ? 'dark' : 'light';
+    document.body.setAttribute('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
 }

@@ -1,6 +1,10 @@
-<div class="d-flex">
+<div class="d-flex flex-column vh-100">
     <nav class="navbar navbar-dark bg-dark w-100">
-        <span class="navbar-brand">Navbar w/ text</span>
+        <span class="navbar-brand">LOCK IN ONE</span>
+
+        <button class="btn btn-primary" (click)="toggleTheme()">
+            {{ isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}
+        </button>
     </nav>
     <router-outlet></router-outlet>
 </div>
