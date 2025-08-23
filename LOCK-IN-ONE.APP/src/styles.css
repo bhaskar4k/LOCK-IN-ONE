@@ -21,6 +21,40 @@
     /* lighter than default dark body */
 }
 
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --light: #f1f1f1;
+    --light1: #f8f8f8;
+    --success: #2abe05;
+    --failed: #fd0000;
+    --warning: #f1b100;
+    --light-blue: #007bff;
+}
+
+::-webkit-scrollbar {
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.width_max_content {
+    width: max-content;
+}
 
 .cursor_pointer {
     cursor: pointer;

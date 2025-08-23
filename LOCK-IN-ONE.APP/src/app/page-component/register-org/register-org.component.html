@@ -3,18 +3,77 @@
         <div class="card-header">
             <h4 class="p-0 m-0">Register Organization</h4>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="form-group mb-2 col-md-6">
-                    <label class="mb-1">Organization's Name<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" placeholder="Enter org's name...">
-                </div>
 
-                <div class="form-group col-md-6">
-                    <label class="mb-1">Organization's Email<span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" placeholder="Enter org's email...">
-                </div>
-            </div>
-        </div>
+
+        <mat-stepper [orientation]="stepperOrientation" [linear]="isLinear" #stepper
+            (selectionChange)="onStepChange($event)">
+            <!-- Step 1 -->
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>
+                        <span [ngClass]="{ 'selected-step-label': selectedStepIndex === 0 }">Organization's
+                            Details</span>
+                    </ng-template>
+
+                    <div class="row">
+                        <div class="form-group mb-2 col-md-6">
+                            <label class="mb-1">Organization's Name<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Enter org's name..."
+                                [(ngModel)]="org_name" [ngModelOptions]="{standalone: true}">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="mb-1">Organization's Email<span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" placeholder="Enter org's email..."
+                                [(ngModel)]="org_email" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <button matStepperNext class="btn btn-secondary btn-sm">Next</button>
+                    </div>
+                </form>
+            </mat-step>
+
+
+            <!-- Step 2 -->
+            <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>
+                        <span [ngClass]="{ 'selected-step-label': selectedStepIndex === 1 }">Application's
+                            Details</span>
+                    </ng-template>
+
+                    <div class="row mb-3">
+                        <div class="form-group mb-2 col-md-6">
+                            <label class="mb-1">Application Count<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" placeholder="Enter the number of applications..."
+                                [(ngModel)]="application_count" [ngModelOptions]="{standalone: true}"
+                                (ngModelChange)="UpdateApplications()">
+                        </div>
+
+                        <div class="col-md-6"></div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-2" *ngFor="let app of applications; let i = index">
+                            <label>Application {{ i + 1 }} URL<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="applications[i]"
+                                [ngModelOptions]="{standalone: true}" placeholder="Enter URL..." />
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <div class="d-flex justify-content-around">
+                            <button class="btn btn-secondary btn-sm me-2" matStepperPrevious>Back</button>
+                            <button class="btn btn-secondary btn-sm" matStepperNext>Next</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-stepper>
     </div>
 </div>
