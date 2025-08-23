@@ -1,3 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    margin: 0;
+}
+
+
+/* For light theme: make navbar slightly darker */
+[data-bs-theme="light"] .navbar {
+    background-color: #eaeaea !important;
+    /* a bit darker than default light body */
+}
+
+/* For dark theme: let Bootstrap default dark colors work */
+[data-bs-theme="dark"] .navbar {
+    background-color: #1a1d22 !important;
+    /* lighter than default dark body */
+}
+
+
 .cursor_pointer {
     cursor: pointer;
+}
+
+.overflow_hidden {
+    overflow: hidden;
+}
+
+.overflow_auto {
+    overflow: auto;
+}
+
+.overflow_scroll {
+    overflow: scroll;
+}
+
+.overflow_x_auto {
+    overflow-x: auto;
+}
+
+.overflow_y_auto {
+    overflow-y: auto;
+}
+
+.overflow_x_scroll {
+    overflow-x: scroll;
+}
+
+.overflow_y_scroll {
+    overflow-y: scroll;
 }
