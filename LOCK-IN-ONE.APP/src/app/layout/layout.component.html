@@ -1,10 +1,16 @@
 <div class="d-flex flex-column vh-100">
     <nav class="navbar navbar-dark bg-dark w-100">
         <span class="navbar-brand">LOCK IN ONE</span>
-
-        <button class="btn btn-primary" (click)="toggleTheme()">
-            {{ isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}
-        </button>
+        
+        <div>
+            <input type="checkbox" class="dark-light-mode-checkbox" id="dark-light-mode-checkbox"
+                (change)="toggleTheme()" [checked]="isDarkMode">
+            <label for="dark-light-mode-checkbox" class="dark-light-mode-checkbox-label">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+                <span class="ball"></span>
+            </label>
+        </div>
     </nav>
     <router-outlet></router-outlet>
 </div>

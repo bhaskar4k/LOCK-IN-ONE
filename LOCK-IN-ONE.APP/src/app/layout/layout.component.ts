@@ -22,5 +22,14 @@ export class LayoutComponent implements OnInit {
     const newTheme = this.isDarkMode ? 'dark' : 'light';
     document.body.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+
+    const checkbox = document.getElementById("checkbox");
+    if (checkbox) {
+      checkbox.addEventListener("change", () => {
+        document.body.classList.toggle("dark")
+      });
+    }
   }
+
+
 }
