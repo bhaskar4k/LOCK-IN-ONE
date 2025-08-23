@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -8,18 +8,20 @@ import { RouterModule } from '@angular/router';
   styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements OnInit {
-  isDarkMode = false;
+  IsDarkMode = false;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // Load saved theme if exists
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.setAttribute('data-bs-theme', savedTheme);
-    this.isDarkMode = savedTheme === 'dark';
+    this.IsDarkMode = savedTheme === 'dark';
   }
 
-  toggleTheme() {
-    this.isDarkMode = !this.isDarkMode;
-    const newTheme = this.isDarkMode ? 'dark' : 'light';
+  ToggleTheme() {
+    this.IsDarkMode = !this.IsDarkMode;
+    const newTheme = this.IsDarkMode ? 'dark' : 'light';
     document.body.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 
@@ -31,5 +33,7 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-
+  RedirectToHome() {
+    this.router.navigate(['home']);
+  }
 }
