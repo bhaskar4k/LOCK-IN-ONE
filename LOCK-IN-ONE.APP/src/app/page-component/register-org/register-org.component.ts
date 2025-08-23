@@ -34,6 +34,9 @@ export class RegisterOrgComponent implements OnInit {
   application_count: number | null = 0;
   applications: string[] = [];
 
+  payload_count: number | null = 0;
+  payloads: string[] = [];
+
   ngOnInit() {
     this.setStepperOrientation();
   }
@@ -69,6 +72,16 @@ export class RegisterOrgComponent implements OnInit {
       this.applications.push(...Array(count - this.applications.length).fill(''));
     } else if (count < this.applications.length) {
       this.applications.splice(count);
+    }
+  }
+
+  UpdatePayloads() {
+    const count = this.payload_count || 0;
+
+    if (count > this.payloads.length) {
+      this.payloads.push(...Array(count - this.payloads.length).fill(''));
+    } else if (count < this.payloads.length) {
+      this.payloads.splice(count);
     }
   }
 }
