@@ -27,9 +27,12 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/bootstrap/bootstrap.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/bootstrap/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

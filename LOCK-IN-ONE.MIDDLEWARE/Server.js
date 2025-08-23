@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('MIDDLEWARE');
+  res.send('Middleware Test API');
 });
 
 // Start Server
