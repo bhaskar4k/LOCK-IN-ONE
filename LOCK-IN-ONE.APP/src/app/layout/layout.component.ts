@@ -6,10 +6,11 @@ import { CustomAlertComponent } from '../common-components/custom-alert/custom-a
 import { ResponseType, TrueFalse } from '../common-constants/enum-constants';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatProgressBarModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
