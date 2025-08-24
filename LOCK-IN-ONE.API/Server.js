@@ -2,6 +2,7 @@ import express from 'express';
 import clear from 'clear'
 
 import ConnectDB from './src/helper/DB.js';
+import InitializeRoutes from './src/helper/Routes.js';
 import RunSeeders from './src/helper/Seeeder.js';
 
 import dotenv from 'dotenv';
@@ -23,5 +24,6 @@ app.listen(PORT, async () => {
   clear();
   await ConnectDB();
   await RunSeeders();
+  InitializeRoutes(app);
   console.log(`API Server is running at http://localhost:${PORT}`);
 });
