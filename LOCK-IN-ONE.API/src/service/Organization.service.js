@@ -8,10 +8,19 @@ import HttpStatus from '../common-constants/HttpStatus.constant.js';
 import PasswordEncryption from '../utility/PasswordEncryption.js';
 const { encrypt, decrypt } = PasswordEncryption;
 
+import EncryptionKey from '../utility/EncryptionKey.js';
+const { GetOrganizationPasswordEncryptionKey, GetOrganizationJwtTokenEncryptionKey } = EncryptionKey;
+
+import Jwt from '../middleware/Jwt.js';
+const { GenerateJwtToken } = Jwt;
+
 import SuccessDTO from '../dto-class/SuccessDTO.js';
 import ErrorDTO from '../dto-class/ErrorDTO.js';
 
 import { v4 as uuidv4 } from 'uuid';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 const RegisterOrganization = async (req, res) => {
     try {
@@ -76,7 +85,7 @@ const RegisterOrganization = async (req, res) => {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application URLs are used<br>" + ExistedApplicationUrls.join(", ") + " are already registered!"));
         }
 
-        const key = process.env.ENCRYPTION_KEY_FOR_ORG_PASSWORD.slice(0, 64);
+        const key = GetOrganizationPasswordEncryptionKey(process.env.ENCRYPTION_KEY);
         data.org_password = encrypt(data.org_password, key);
 
         const new_org_guid = uuidv4();
@@ -140,18 +149,25 @@ const Login = async (req, res) => {
     try {
         const data = req.body;
 
-        const key = process.env.ENCRYPTION_KEY_FOR_ORG_PASSWORD.slice(0, 64);
+        const OrgPasswordEncryptionkey = GetOrganizationPasswordEncryptionKey(process.env.ENCRYPTION_KEY);
         
         const OrgExists = await Organization.findOne({ org_email: data.email });
         if (!OrgExists) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("An organization with this email does not exist!"));
         }
 
-        if (decrypt(OrgExists.org_password, key) !== data.password) {
+        if (decrypt(OrgExists.org_password, OrgPasswordEncryptionkey) !== data.password) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("You've entered wrond password!"));
         }
 
-        return res.status(HttpStatus.OK).json(new SuccessDTO("Login is successful!"));
+        const OrgJwtTokenEncryptionkey = GetOrganizationJwtTokenEncryptionKey(process.env.ENCRYPTION_KEY);
+
+        const TokenPayload = {
+            org_name: OrgExists.org_name,
+            org_email: encrypt(OrgExists.org_email, OrgJwtTokenEncryptionkey),
+        }
+
+        return res.status(HttpStatus.OK).json(new SuccessDTO("Login is successful!", GenerateJwtToken(TokenPayload, OrgJwtTokenEncryptionkey)));
     } catch (error) {
         console.log(error);
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorDTO());
