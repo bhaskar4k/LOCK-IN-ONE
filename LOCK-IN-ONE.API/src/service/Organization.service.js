@@ -27,33 +27,45 @@ const RegisterOrganization = async (req, res) => {
         if (!data.payload_instance_count || !Number.isInteger(data.payload_instance_count) || data.payload_instance_count <= 0) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Payload variable count is required!"));
         }
-        if(!data.payload_variables || !Array.isArray(data.payload_variables) || data.payload_variables.length <= 0){
-            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Payload variables are required!"));
+        if (!data.payload_variables || !Array.isArray(data.payload_variables) || data.payload_variables.length <= 0) {
+            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Token payload variables are required!"));
         }
-        if(!data.application_urls || !Array.isArray(data.application_urls) || data.application_urls.length <= 0){
+        if (!data.application_urls || !Array.isArray(data.application_urls) || data.application_urls.length <= 0) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application urls are required!"));
         }
-        if(data.application_urls.length !== data.application_count){
+        if (data.application_urls.length !== data.application_count) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application count and application urls count must be equal!"));
         }
-        if(data.payload_variables.length !== data.payload_instance_count){
-            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Payload instance count and payload variables count must be equal!"));
+        if (data.payload_variables.length !== data.payload_instance_count) {
+            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Token payload instance's count and payload variables count must be equal!"));
+        }
+
+        for (let i = 0; i < data.payload_variables.length; i++) {
+            if (data.payload_variables[i].length <= 0) {
+                return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Token payload variable's length must be strictly greater than 0!"));
+            }
+        }
+
+        for (let i = 0; i < data.application_urls.length; i++) {
+            if (data.application_urls[i].length <= 0) {
+                return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application URL's length must be strictly greater than 0!"));
+            }
         }
 
 
         // Validations
         const OrgExistsEmail = await Organization.findOne({ org_email: data.org_email });
-        if(OrgExistsEmail){
+        if (OrgExistsEmail) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("An organization with the same email already exists!"));
         }
 
         const OrgExistsName = await Organization.findOne({ org_name: data.org_name });
-        if(OrgExistsName){
+        if (OrgExistsName) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("An organization with the same name already exists!"));
         }
 
         const SameApplicationUrls = await Application.find({ application_url: { $in: data.application_urls } });
-        if(SameApplicationUrls.length > 0){
+        if (SameApplicationUrls.length > 0) {
             const ExistedApplicationUrls = SameApplicationUrls.map(application => application.application_url);
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application URLs are used<br>" + ExistedApplicationUrls.join(", ") + " are already registered!"));
         }
