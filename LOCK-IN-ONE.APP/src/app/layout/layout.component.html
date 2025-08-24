@@ -1,17 +1,24 @@
-<div class="d-flex flex-column vh-100 overflow_y_auto">
-    <nav class="navbar w-100 px-3 pe-3 bg-body-tertiary">
-        <h2 class="cursor_pointer fw-bold p-0 m-2" (click)="RedirectToHome()">LOCK IN ONE</h2>
+<div class="d-flex flex-column vh-100 overflow_y_auto justify-content-between">
+    <div>
+        <nav class="navbar w-100 px-3 pe-3 bg-body-tertiary">
+            <h2 class="cursor_pointer fw-bold p-0 m-2" (click)="RedirectToHome()">LOCK IN ONE</h2>
 
-        <div>
-            <input type="checkbox" class="dark-light-mode-checkbox" id="dark-light-mode-checkbox"
-                (change)="ToggleTheme()" [checked]="IsDarkMode">
-            <label for="dark-light-mode-checkbox" class="dark-light-mode-checkbox-label">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-                <span class="ball"></span>
-            </label>
-        </div>
-    </nav>
+            <div>
+                <input type="checkbox" class="dark-light-mode-checkbox" id="dark-light-mode-checkbox"
+                    (change)="ToggleTheme()" [checked]="IsDarkMode">
+                <label for="dark-light-mode-checkbox" class="dark-light-mode-checkbox-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="ball"></span>
+                </label>
+            </div>
+        </nav>
 
-    <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p class="mb-0">Created by Bhaskar Nandy</p>
+    </footer>
 </div>

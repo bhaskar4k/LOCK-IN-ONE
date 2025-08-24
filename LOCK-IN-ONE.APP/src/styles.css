@@ -32,6 +32,12 @@
     --light-blue: #007bff;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .matProgressBar {
     border-radius: 50px;
     color: var(--light-blue);
