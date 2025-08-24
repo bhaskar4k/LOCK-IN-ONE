@@ -13,6 +13,6 @@ export class OrganizationService {
   }
 
   DoLogin(obj: any) {
-    return this.http.post<any>(GetBaseURL() + Endpoints.Common.Login, obj);
+    return this.http.post<any>(GetBaseURL() + Endpoints.Organization.Login, obj);
   }
 }

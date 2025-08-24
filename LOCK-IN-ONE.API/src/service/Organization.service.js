@@ -136,6 +136,29 @@ const RegisterOrganization = async (req, res) => {
     }
 }
 
+const Login = async (req, res) => {
+    try {
+        const data = req.body;
+
+        const key = process.env.ENCRYPTION_KEY_FOR_ORG_PASSWORD.slice(0, 64);
+        
+        const OrgExists = await Organization.findOne({ org_email: data.email });
+        if (!OrgExists) {
+            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("An organization with this email does not exist!"));
+        }
+
+        if (decrypt(OrgExists.org_password, key) !== data.password) {
+            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("You've entered wrond password!"));
+        }
+
+        return res.status(HttpStatus.OK).json(new SuccessDTO("Login is successful!"));
+    } catch (error) {
+        console.log(error);
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorDTO());
+    }
+}
+
 export default {
-    RegisterOrganization
+    RegisterOrganization,
+    Login
 }

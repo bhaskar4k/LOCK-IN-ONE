@@ -11,8 +11,6 @@ export function GetBaseURL() {
 export const Endpoints = {
   Organization: {
     Register: "organization/register",
+    Login: "organization/login",
   },
-  Common: {
-    Login: "login",
-  }
 }
