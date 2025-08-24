@@ -10,7 +10,8 @@ const applicationSchema = new mongoose.Schema({
     },
     application_url: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     data_status: {
         type: String,

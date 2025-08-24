@@ -8,7 +8,7 @@ class ErrorDTO {
      * @param {string} message - A descriptive message about the response
      * @param {*} [data=null] - Nullable data of any type
      */
-    constructor(data = null, message = "Failed to process the request!") {
+    constructor(message = "Failed to process the request!", data = null) {
         this.success = TRUE_FALSE.FALSE;
         this.message = message;
         this.data = data;
