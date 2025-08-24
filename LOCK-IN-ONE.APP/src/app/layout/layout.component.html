@@ -17,7 +17,12 @@
         <router-outlet></router-outlet>
     </div>
 
-    <div *ngIf="Menu !== null" [innerHTML]="GenerateMenu(Menu)"></div>
+    <nav class="nav nav-pills flex-column gap-2">
+        <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">
+            {{ m.menu_name }}
+        </a>
+    </nav>
 
     <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3">

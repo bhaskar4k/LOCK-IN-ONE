@@ -4,8 +4,8 @@ import { CommonService } from '../service/common/common.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomAlertComponent } from '../common-components/custom-alert/custom-alert.component';
 import { ResponseType, TrueFalse } from '../common-constants/enum-constants';
-import { GenerateMenu } from '../utility/menu.utility';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-layout',
@@ -18,11 +18,15 @@ export class LayoutComponent implements OnInit {
   matProgressBarVisible = false;
   readonly dialog = inject(MatDialog);
 
-  Menu: string | null = null;
+  Menu: any[] = [];
 
-  GenerateMenu = GenerateMenu;
+  constructor(
+    private router: Router,
+    private commonService: CommonService,
+    private sanitizer: DomSanitizer
+  ) { }
 
-  constructor(private router: Router, private commonService: CommonService) { }
+  selectedMenuId: string = 'MENU001';
 
   ngOnInit(): void {
     this.GetMenu();

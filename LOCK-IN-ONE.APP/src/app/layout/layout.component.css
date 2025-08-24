@@ -51,10 +51,15 @@
   text-decoration: none;
 }
 
+.active-menu {
+  background-color: #007bff !important;
+  color: white !important;
+  font-weight: bold;
+}
 
-
-
-
+.nav-link:hover {
+  background-color: #e9ecef;
+}
 
 
 /*  Support me if you like it */
