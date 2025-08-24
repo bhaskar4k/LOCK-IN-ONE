@@ -16,3 +16,5 @@ export const TrueFalse = {
     TRUE: true,
     FALSE: false,
 }
+
+export const JWT_KEY = "lock_in_one_jwt";

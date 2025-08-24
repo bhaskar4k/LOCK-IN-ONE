@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomAlertComponent } from '../../common-components/custom-alert/custom-alert.component';
-import { ResponseType, TrueFalse } from '../../common-constants/enum-constants';
+import { JWT_KEY, ResponseType, TrueFalse } from '../../common-constants/enum-constants';
 import { OrganizationService } from '../../service/organization/organization.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -43,8 +43,8 @@ export class LoginComponent {
         this.matProgressBarVisible = false;
 
         if (response && response.success === TrueFalse.TRUE) {
-          localStorage.removeItem("lock_in_one_jwt");
-          localStorage.setItem("lock_in_one_jwt", JSON.stringify(response.data));
+          localStorage.removeItem(JWT_KEY);
+          localStorage.setItem(JWT_KEY, JSON.stringify(response.data));
           this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
         } else {
           this.OpenDialog(response.message, ResponseType.ERROR, null);
