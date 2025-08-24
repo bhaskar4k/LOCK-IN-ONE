@@ -46,6 +46,8 @@ export class RegisterOrgComponent implements OnInit {
   payloads: string[] = [];
 
   org_password: string | null = null;
+  confirm_password: string | null = null;
+  errMsg: string | null = null;
 
   constructor(private organizationService: OrganizationService) { }
 
@@ -93,6 +95,13 @@ export class RegisterOrgComponent implements OnInit {
     }
   }
 
+  ValidatePassword() {
+    this.errMsg = null;
+    if(this.org_password && this.confirm_password && (this.org_password.trim() !== this.confirm_password.trim())) {
+      this.errMsg = "Passwords do not match";
+    }
+  }
+
   UpdatePayloads() {
     const count = this.payload_count || 0;
 
@@ -101,6 +110,38 @@ export class RegisterOrgComponent implements OnInit {
     } else if (count < this.payloads.length) {
       this.payloads.splice(count);
     }
+  }
+
+  ValidateForm() {
+    return this.org_name !== null && this.org_name.trim() !== '' && this.org_email !== null && this.org_email.trim() !== ''
+      && this.org_password !== null && this.org_password.trim() !== '' && this.confirm_password !== null && this.confirm_password.trim() !== '' 
+      && this.org_password === this.confirm_password;
+  }
+
+  ValidateApplications() {
+    let ok = this.application_count !== null && this.application_count > 0;
+
+    for(let i = 0; i < this.applications.length; i++) {
+      if(this.applications[i] === null || this.applications[i].trim() === '') {
+        ok = false;
+        break;
+      }
+    }
+
+    return ok;  
+  }
+
+  ValidatePayloads() {
+    let ok = this.payload_count !== null && this.payload_count > 0;
+
+    for(let i = 0; i < this.payloads.length; i++) {
+      if(this.payloads[i] === null || this.payloads[i].trim() === '') {
+        ok = false;
+        break;
+      }
+    }
+    
+    return ok;
   }
 
   RegisterOrganization() {

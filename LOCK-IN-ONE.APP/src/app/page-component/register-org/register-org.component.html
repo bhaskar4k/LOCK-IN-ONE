@@ -147,7 +147,7 @@
                     </div>
 
 
-                    <div class="row" *ngIf="payload_count !== null && payload_count > 0">
+                    <div class="row mb-4" *ngIf="payload_count !== null && payload_count > 0">
                         <span>Token Payload = &#123;</span><br>
                         <div class="d-flex flex-column" *ngFor="let payload of payloads; let i = index">
                             <span>&nbsp;&nbsp;&nbsp;&nbsp;"{{ payload }}" : example_user_{{ payload }}</span>
@@ -159,16 +159,26 @@
                         <div class="form-group mb-2 col-md-6">
                             <label class="mb-1">Organization Password<span class="text-danger">*</span></label>
 
-                            <input type="text" class="form-control" placeholder="Enter organization password..."
-                                [(ngModel)]="org_password" [ngModelOptions]="{standalone: true}">
+                            <input type="password" class="form-control" placeholder="Enter organization password..."
+                                [(ngModel)]="org_password" [ngModelOptions]="{standalone: true}" (ngModelChange)="ValidatePassword()">
                         </div>
+
+                        <div class="form-group mb-2 col-md-6">
+                            <label class="mb-1">Confirm Password<span class="text-danger">*</span></label>
+
+                            <input type="password" class="form-control" placeholder="Confirm password..."
+                                [(ngModel)]="confirm_password" [ngModelOptions]="{standalone: true}" (ngModelChange)="ValidatePassword()">
+                        </div>
+
+                        <span *ngIf="errMsg !== null" class="text-danger">{{errMsg}}</span>
                     </div>
 
 
                     <div class="d-flex justify-content-end mt-3">
                         <div class="d-flex justify-content-around">
                             <button class="btn btn-secondary btn-sm me-2" matStepperPrevious>Back</button>
-                            <button class="btn btn-success btn-sm" (click)="RegisterOrganization()">Save</button>
+                            <button class="btn btn-success btn-sm" (click)="RegisterOrganization()"
+                                [disabled]="!ValidateForm() || !ValidateApplications() || !ValidatePayloads() || matProgressBarVisible">Save</button>
                         </div>
                     </div>
                 </form>
