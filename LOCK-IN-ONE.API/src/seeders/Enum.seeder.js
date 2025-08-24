@@ -31,7 +31,7 @@ const SeedEnum = async () => {
 
         console.log(`Enums seeded successfully! Total ${count} enums added!\n`);
     } catch (error) {
-        console.log("Failed to seeder enum error:", error);
+        console.log("Failed to seed enum error:", error);
         process.exit(1);
     }
 };
