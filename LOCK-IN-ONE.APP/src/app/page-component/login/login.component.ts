@@ -43,6 +43,8 @@ export class LoginComponent {
         this.matProgressBarVisible = false;
 
         if (response && response.success === TrueFalse.TRUE) {
+          localStorage.removeItem("lock_in_one_jwt");
+          localStorage.setItem("lock_in_one_jwt", JSON.stringify(response.data));
           this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
         } else {
           this.OpenDialog(response.message, ResponseType.ERROR, null);
