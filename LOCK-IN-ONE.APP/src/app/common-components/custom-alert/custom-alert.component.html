@@ -1,0 +1,14 @@
+<div class="card overflow_hidden">
+  <div class="card-header p-2">
+    <h5 class="card-title p-0 m-0 fw-bold fs-4" [class]="textColorClass">{{alertHeader}}</h5>
+  </div>
+
+
+  <div class="card-body p-2 text-center mt-3 mb-3">
+    <span class="fw-bold text-center" [innerHTML]="formattedText" [class]="textColorClass"></span>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end p-2">
+    <button mat-button [class]="buttonClass" (click)="onClose()">Close</button>
+  </div>
+</div>
