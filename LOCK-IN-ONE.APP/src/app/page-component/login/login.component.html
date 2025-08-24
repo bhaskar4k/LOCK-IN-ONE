@@ -1,23 +1,23 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="card shadow w-50">
-            <div class="card-body">
-                <h3 class="card-title text-center mb-4">Login</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter password" required>
-                    </div>
+<!-- <mat-progress-bar mode="indeterminate" *ngIf="matProgressBarVisible" class="matProgressBar"></mat-progress-bar> -->
 
-                    <div class="text-center mt-3 d-flex justify-content-end">
-                        <button class="btn btn-primary btn-sm width_max_content">Login</button>
-                    </div>
-                </form>
-            </div>
+<div class="container col-md-6 pt-3 pb-3">
+    <div class="card m-0">
+        <div class="card-header">
+            <h4 class="p-0 m-0">Login</h4>
+        </div>
+
+        <div class="m-3">
+            <label for="email" class="form-label p-0 m-0">Email address<span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" required [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+        </div>
+        
+        <div class="m-3">
+            <label for="password" class="form-label p-0 m-0">Password<span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" required [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+        </div>
+
+        <div class="text-center m-3 d-flex justify-content-end">
+            <button class="btn btn-primary btn-sm width_max_content">Login</button>
         </div>
     </div>
 </div>

@@ -12,4 +12,7 @@ export const Endpoints = {
   Organization: {
     Register: "organization/register",
   },
+  Common: {
+    Login: "login",
+  }
 }

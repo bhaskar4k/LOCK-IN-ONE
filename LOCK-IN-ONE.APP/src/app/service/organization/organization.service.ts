@@ -11,4 +11,8 @@ export class OrganizationService {
   DoRegisterOrganization(obj: any) {
     return this.http.post<any>(GetBaseURL() + Endpoints.Organization.Register, obj);
   }
+
+  DoLogin(obj: any) {
+    return this.http.post<any>(GetBaseURL() + Endpoints.Common.Login, obj);
+  }
 }
