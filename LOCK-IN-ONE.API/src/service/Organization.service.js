@@ -5,6 +5,9 @@ import Payload from '../entity/Payload.model.js';
 import EnumsConstants from '../common-constants/Enum.constant.js';
 import HttpStatus from '../common-constants/HttpStatus.constant.js';
 
+import PasswordEncryption from '../utility/PasswordEncryption.js';
+const { encrypt, decrypt } = PasswordEncryption;
+
 import SuccessDTO from '../dto-class/SuccessDTO.js';
 import ErrorDTO from '../dto-class/ErrorDTO.js';
 
@@ -15,10 +18,10 @@ const RegisterOrganization = async (req, res) => {
         const data = req.body;
 
         // Check if all required fields are present
-        if (!data.org_name) {
+        if (!data.org_name || data.org_name.length <= 0) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Organization name is required!"));
         }
-        if (!data.org_email) {
+        if (!data.org_email || data.org_email.length <= 0) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Organization email is required!"));
         }
         if (!data.application_count || !Number.isInteger(data.application_count) || data.application_count <= 0) {
@@ -38,6 +41,9 @@ const RegisterOrganization = async (req, res) => {
         }
         if (data.payload_variables.length !== data.payload_instance_count) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Token payload instance's count and payload variables count must be equal!"));
+        }
+        if (!data.org_password || data.org_password.length <= 0) {
+            return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Organization password is required!"));
         }
 
         for (let i = 0; i < data.payload_variables.length; i++) {
@@ -70,6 +76,8 @@ const RegisterOrganization = async (req, res) => {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Application URLs are used<br>" + ExistedApplicationUrls.join(", ") + " are already registered!"));
         }
 
+        const key = process.env.ENCRYPTION_KEY_FOR_ORG_PASSWORD.slice(0, 64);
+        data.org_password = encrypt(data.org_password, key);
 
         const new_org_guid = uuidv4();
 
@@ -77,6 +85,7 @@ const RegisterOrganization = async (req, res) => {
             org_name: data.org_name,
             org_guid: new_org_guid,
             org_email: data.org_email,
+            org_password: data.org_password,
             application_count: data.application_count,
             payload_instance_count: data.payload_instance_count,
         });
@@ -122,6 +131,7 @@ const RegisterOrganization = async (req, res) => {
 
         return res.status(HttpStatus.OK).json(new SuccessDTO("Organization has been registered successfully!"));
     } catch (error) {
+        console.log(error);
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorDTO());
     }
 }

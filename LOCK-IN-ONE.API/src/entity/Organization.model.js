@@ -18,6 +18,11 @@ const organizationSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    org_password: {
+        type: String,
+        required: true,
+        unique: true
+    },
     application_count: {
         type: Number,
         required: true,
