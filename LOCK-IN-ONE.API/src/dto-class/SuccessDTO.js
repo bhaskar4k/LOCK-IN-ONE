@@ -8,7 +8,7 @@ class SuccessDTO {
      * @param {string} message - A descriptive message about the response
      * @param {*} [data=null] - Nullable data of any type
      */
-    constructor(message = "Request Successful!", data = null) {
+    constructor(data = null, message = "Request has been processed successfully!") {
         this.success = TRUE_FALSE.TRUE;
         this.message = message;
         this.data = data;
