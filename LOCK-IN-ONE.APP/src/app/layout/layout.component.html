@@ -16,15 +16,22 @@
 
         <mat-progress-bar mode="indeterminate" *ngIf="matProgressBarVisible" class="matProgressBar"></mat-progress-bar>
 
-        <router-outlet></router-outlet>
+        <div class="d-flex w-100">
+            <nav class="nav nav-pills flex-column gap-2 mt-3 mx-3" id="menu_width">
+                <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">
+                    {{ m.menu_name }}
+                </a>
+            </nav>
+
+            <div class="flex-grow-1 p-3">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
     </div>
-    
-    <nav class="nav nav-pills flex-column gap-2">
-        <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">
-            {{ m.menu_name }}
-        </a>
-    </nav>
+
+
 
     <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3">

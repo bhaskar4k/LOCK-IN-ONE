@@ -60,7 +60,9 @@
 .nav-link:hover {
   background-color: #e9ecef;
 }
-
+#menu_width {
+  width: 15rem;
+}
 
 /*  Support me if you like it */
 .support {
