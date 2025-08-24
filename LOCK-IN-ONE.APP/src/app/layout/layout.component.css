@@ -16,9 +16,13 @@
   align-items: center;
 }
 
-.fa-moon {color: #f1c40f;}
+.fa-moon {
+  color: #f1c40f;
+}
 
-.fa-sun {color: #f39c12;}
+.fa-sun {
+  color: #f39c12;
+}
 
 .dark-light-mode-checkbox-label .ball {
   background-color: #fff;
@@ -31,11 +35,21 @@
   transition: transform 0.2s linear;
 }
 
-.dark-light-mode-checkbox:checked + .dark-light-mode-checkbox-label .ball {
+.dark-light-mode-checkbox:checked+.dark-light-mode-checkbox-label .ball {
   transform: translateX(24px);
 }
 
+.custom-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
 
+.custom-link:hover {
+  color: var(--warning);
+  text-decoration: none;
+}
 
 
 
@@ -45,9 +59,9 @@
 
 /*  Support me if you like it */
 .support {
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 
 .support a {
@@ -58,6 +72,6 @@
   transition: transform 0.2s ease;
 }
 
-.support a:hover{
+.support a:hover {
   transform: scale(1.1);
 }
