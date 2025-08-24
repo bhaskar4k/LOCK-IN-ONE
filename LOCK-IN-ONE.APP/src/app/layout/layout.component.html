@@ -1,7 +1,10 @@
 <div class="d-flex flex-column vh-100 overflow_y_auto justify-content-between">
     <div>
         <nav class="navbar w-100 px-3 pe-3 bg-body-tertiary">
-            <h2 class="cursor_pointer fw-bold p-0 m-2" (click)="RedirectToHome()">LOCK IN ONE</h2>
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-bars me-2 fs-2 cursor_pointer" id="menu_toggle"></i>
+                <h2 class="cursor_pointer fw-bold p-0 m-2" (click)="RedirectToHome()">LOCK IN ONE</h2>
+            </div>
 
             <div>
                 <input type="checkbox" class="dark-light-mode-checkbox" id="dark-light-mode-checkbox"
@@ -17,12 +20,14 @@
         <mat-progress-bar mode="indeterminate" *ngIf="matProgressBarVisible" class="matProgressBar"></mat-progress-bar>
 
         <div class="d-flex w-100">
-            <nav class="nav nav-pills flex-column gap-2 mt-3 mx-3" id="menu_width">
-                <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">
-                    {{ m.menu_name }}
-                </a>
-            </nav>
+            <div id="show_menu" class="bg-light">
+                <nav class="nav nav-pills flex-column gap-2 border">
+                    <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">
+                        {{ m.menu_name }}
+                    </a>
+                </nav>
+            </div>
 
             <div class="flex-grow-1 p-3">
                 <router-outlet></router-outlet>

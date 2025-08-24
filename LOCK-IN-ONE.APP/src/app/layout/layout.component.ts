@@ -35,6 +35,17 @@ export class LayoutComponent implements OnInit {
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.setAttribute('data-bs-theme', savedTheme);
     this.IsDarkMode = savedTheme === 'dark';
+
+    const menuToggle = document.getElementById("menu_toggle");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        console.log("HI")
+        const menu = document.getElementById("show_menu");
+        if (menu) {
+          menu.style.height = (menu.style.height === "0px") ? "1000px" : "0px";
+        }
+      });
+    }
   }
 
   ToggleTheme() {
@@ -62,10 +73,11 @@ export class LayoutComponent implements OnInit {
       next: async (response) => {
         this.matProgressBarVisible = false;
 
-        this.Menu = response.data;
         if (response && response.success === TrueFalse.FALSE) {
           this.OpenDialog(response.message, ResponseType.ERROR, false);
         }
+
+        this.Menu = response.data;
       },
       error: (err) => {
         this.matProgressBarVisible = false;

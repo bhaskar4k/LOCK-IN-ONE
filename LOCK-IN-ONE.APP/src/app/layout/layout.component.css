@@ -51,6 +51,17 @@
   text-decoration: none;
 }
 
+#show_menu {
+  position: absolute;
+  height: 0px;
+  overflow-y: hidden;
+  transition: 0.3s all ease-in-out;
+  width: 20rem;
+  z-index: 100;
+  max-height: max-content;
+  border-radius: 0.7rem;
+}
+
 .active-menu {
   background-color: #007bff !important;
   color: white !important;
@@ -59,9 +70,6 @@
 
 .nav-link:hover {
   background-color: #e9ecef;
-}
-#menu_width {
-  width: 15rem;
 }
 
 /*  Support me if you like it */
