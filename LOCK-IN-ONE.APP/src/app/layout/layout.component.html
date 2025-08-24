@@ -17,6 +17,8 @@
         <router-outlet></router-outlet>
     </div>
 
+    <div *ngIf="Menu !== null" [innerHTML]="GenerateMenu(Menu)"></div>
+
     <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3">
         <a href="https://linktr.ee/bhaskar_op" class="custom-link mb-0" target="_blank">

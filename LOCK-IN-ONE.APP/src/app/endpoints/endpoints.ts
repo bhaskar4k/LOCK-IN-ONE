@@ -13,4 +13,7 @@ export const Endpoints = {
     Register: "organization/register",
     Login: "organization/login",
   },
+  Common: {
+    Menu: "common/menu",
+  }
 }
