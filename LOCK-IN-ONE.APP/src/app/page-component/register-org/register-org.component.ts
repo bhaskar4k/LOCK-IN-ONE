@@ -45,6 +45,8 @@ export class RegisterOrgComponent implements OnInit {
   payload_count: number | null = 0;
   payloads: string[] = [];
 
+  org_password: string | null = null;
+
   constructor(private organizationService: OrganizationService) { }
 
   ngOnInit() {
@@ -105,6 +107,7 @@ export class RegisterOrgComponent implements OnInit {
     const obj = {
       org_name: this.org_name,
       org_email: this.org_email,
+      org_password: this.org_password,
       application_count: this.application_count,
       application_urls: this.applications,
       payload_instance_count: this.payload_count,
