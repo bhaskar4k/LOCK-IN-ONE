@@ -32,6 +32,11 @@
     --light-blue: #007bff;
 }
 
+.matProgressBar {
+    border-radius: 50px;
+    color: var(--light-blue);
+}
+
 ::-webkit-scrollbar {
     height: 10px;
 }

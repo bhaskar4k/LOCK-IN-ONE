@@ -9,6 +9,7 @@ import { OrganizationService } from '../../service/organization/organization.ser
 import { MatDialog } from '@angular/material/dialog';
 import { ResponseType, TrueFalse } from '../../common-constants/enum-constants';
 import { CustomAlertComponent } from '../../common-components/custom-alert/custom-alert.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { CustomAlertComponent } from '../../common-components/custom-alert/custo
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatProgressBarModule
   ],
   standalone: true,
   templateUrl: './register-org.component.html',
@@ -27,6 +29,7 @@ import { CustomAlertComponent } from '../../common-components/custom-alert/custo
 })
 export class RegisterOrgComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
+  matProgressBarVisible = false;
   readonly dialog = inject(MatDialog);
 
   selectedStepIndex: number = 0;
@@ -108,10 +111,12 @@ export class RegisterOrgComponent implements OnInit {
       payload_variables: this.payloads,
     };
 
+    this.matProgressBarVisible = true;
 
     this.organizationService.DoRegisterOrganization(obj).subscribe({
       next: async (response) => {
-        console.log("Org Registration", response);
+        this.matProgressBarVisible = false;
+        
         if (response && response.success === TrueFalse.TRUE) {
           this.OpenDialog(response.message, ResponseType.SUCCESS, false);
         } else {
@@ -119,6 +124,7 @@ export class RegisterOrgComponent implements OnInit {
         }
       },
       error: (err) => {
+        this.matProgressBarVisible = false;
         this.OpenDialog(err.error.message ?? "Failed to process the request!", ResponseType.ERROR, false);
       }
     });
