@@ -14,7 +14,6 @@ const RegisterOrganization = async (req, res) => {
     try {
         const data = req.body;
 
-        console.log(data)
         // Check if all required fields are present
         if (!data.org_name) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("Organization name is required!"));
@@ -111,7 +110,6 @@ const RegisterOrganization = async (req, res) => {
 
         return res.status(HttpStatus.OK).json(new SuccessDTO("Organization has been registered successfully!"));
     } catch (error) {
-        console.log(error)
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorDTO());
     }
 }
