@@ -1,5 +1,5 @@
-<div class="card overflow_hidden">
-  <div class="card-header p-2">
+<div class="card overflow_hidden border_radius_custom">
+  <div class="card-header p-2 overflow_hidden">
     <h5 class="card-title p-0 m-0 fw-bold fs-4" [class]="textColorClass">{{alertHeader}}</h5>
   </div>
 
@@ -8,7 +8,7 @@
     <span class="fw-bold text-center" [innerHTML]="formattedText" [class]="textColorClass"></span>
   </div>
 
-  <div class="card-footer d-flex justify-content-end p-2">
+  <div class="card-footer d-flex justify-content-end p-2 overflow_hidden">
     <button mat-button [class]="buttonClass" (click)="onClose()">Close</button>
   </div>
 </div>

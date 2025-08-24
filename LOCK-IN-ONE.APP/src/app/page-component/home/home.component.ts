@@ -20,7 +20,6 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(CustomAlertComponent, { 
       width: '30rem',
       height: 'max-content',
-      panelClass: 'responsive-dialog',
       disableClose: true,
       data: { text: dialogText, type: dialogType } });
 
