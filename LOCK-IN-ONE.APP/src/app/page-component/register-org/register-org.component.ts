@@ -67,6 +67,9 @@ export class RegisterOrgComponent implements OnInit {
     this.selectedStepIndex = event.selectedIndex;
   }
 
+  TrackByIndex(index: number, item: any): any {
+    return index;
+  }
 
   UpdateApplications() {
     const count = this.application_count || 0;
