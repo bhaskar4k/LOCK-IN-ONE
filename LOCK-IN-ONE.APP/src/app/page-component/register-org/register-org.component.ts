@@ -57,7 +57,10 @@ export class RegisterOrgComponent implements OnInit {
     secondCtrl: ['', Validators.required],
   });
   thirdFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+    thirdCtrl: ['', Validators.required],
+  });
+  forthFormGroup = this._formBuilder.group({
+    forthCtrl: ['', Validators.required],
   });
 
   onStepChange(event: StepperSelectionEvent): void {
