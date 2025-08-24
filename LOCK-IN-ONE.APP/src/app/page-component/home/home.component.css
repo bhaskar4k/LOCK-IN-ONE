@@ -1,0 +1,8 @@
+.home_component_card_hover {
+    transform: scale(1);
+    transition: 0.3s all ease-in-out;
+}
+
+.home_component_card_hover:hover {
+    transform: scale(1.06);
+}
