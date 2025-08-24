@@ -6,6 +6,7 @@ import { OrganizationService } from '../../service/organization/organization.ser
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,10 @@ export class LoginComponent {
   matProgressBarVisible = false;
   readonly dialog = inject(MatDialog);
 
-  constructor(private organizationService: OrganizationService) { }
+  constructor(
+    private organizationService: OrganizationService,
+    private router: Router
+  ) { }
 
   email: string | null = null;
   password: string | null = null;
@@ -39,19 +43,19 @@ export class LoginComponent {
         this.matProgressBarVisible = false;
 
         if (response && response.success === TrueFalse.TRUE) {
-          this.OpenDialog(response.message, ResponseType.SUCCESS, false);
+          this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
         } else {
-          this.OpenDialog(response.message, ResponseType.ERROR, false);
+          this.OpenDialog(response.message, ResponseType.ERROR, null);
         }
       },
       error: (err) => {
         this.matProgressBarVisible = false;
-        this.OpenDialog(err.error.message ?? "Failed to process the request!", ResponseType.ERROR, false);
+        this.OpenDialog(err.error.message ?? "Failed to process the request!", ResponseType.ERROR, null);
       }
     });
   }
 
-  OpenDialog(dialogText: string, dialogType: string, pageReloadNeeded: boolean): void {
+  OpenDialog(dialogText: string, dialogType: string, redirect: string | null): void {
     const dialogRef = this.dialog.open(CustomAlertComponent, {
       width: '30rem',
       height: 'max-content',
@@ -59,9 +63,9 @@ export class LoginComponent {
       data: { text: dialogText, type: dialogType }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      if (pageReloadNeeded) {
-        window.location.reload();
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (redirect !== null) {
+        this.router.navigate([redirect]);
       }
     });
   }
