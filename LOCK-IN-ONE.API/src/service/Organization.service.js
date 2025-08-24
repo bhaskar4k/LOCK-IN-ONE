@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 const RegisterOrganization = async (req, res) => {
     try {
         const data = req.body;
+        console.log(data)
 
         // Check if all required fields are present
         if (!data.org_name) {

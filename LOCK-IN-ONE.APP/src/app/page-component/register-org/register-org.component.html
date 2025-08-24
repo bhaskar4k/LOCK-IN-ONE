@@ -126,10 +126,9 @@
                     </ng-template>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <span>Organization's Name : {{ org_name }}</span>
-                            <br>
-                            <span>Organization's Email : {{ org_email }}</span>
+                        <div class="col-md-6 d-flex flex-column">
+                            <span *ngIf="org_name !== null && org_name.trim() !== ''">Organization's Name : {{ org_name }}</span>
+                            <span *ngIf="org_email !== null && org_email.trim() !== ''">Organization's Email : {{ org_email }}</span>
                         </div>
 
                         <div class="col-md-6"></div>
@@ -143,9 +142,9 @@
 
 
                     <div class="row" *ngIf="payload_count !== null && payload_count > 0">
-                        <span>Payload = &#123;</span><br>
+                        <span>Token Payload = &#123;</span><br>
                         <div class="d-flex flex-column" *ngFor="let payload of payloads; let i = index">
-                            <span>&nbsp;&nbsp;&nbsp;&nbsp;"{{ payload }}" : user_{{ payload }}</span>
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;"{{ payload }}" : example_user_{{ payload }}</span>
                         </div>
                         <span>&#125;</span>
                     </div>
@@ -154,12 +153,12 @@
                     <div class="d-flex justify-content-end mt-3">
                         <div class="d-flex justify-content-around">
                             <button class="btn btn-secondary btn-sm me-2" matStepperPrevious>Back</button>
-                            <button class="btn btn-success btn-sm">Save</button>
+                            <button class="btn btn-success btn-sm" (click)="RegisterOrganization()">Save</button>
                         </div>
                     </div>
                 </form>
             </mat-step>
-            
+
         </mat-stepper>
     </div>
 </div>

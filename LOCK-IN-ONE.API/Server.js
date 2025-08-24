@@ -1,5 +1,6 @@
 import express from 'express';
 import clear from 'clear'
+import cors from 'cors';
 
 import ConnectDB from './src/helper/DB.js';
 import InitializeRoutes from './src/helper/Routes.js';
@@ -10,14 +11,25 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const AllowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(",") : [];
 
 // Middleware
 app.use(express.json());
 
-// Routes
-app.get('/', (req, res) => {
-  res.send('Test API');
-});
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || AllowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  exposedHeaders: ['Content-Disposition'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 // Start Server
 app.listen(PORT, async () => {

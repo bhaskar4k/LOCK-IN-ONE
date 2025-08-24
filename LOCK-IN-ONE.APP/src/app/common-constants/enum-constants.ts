@@ -11,3 +11,8 @@ export const ResponseTypeDescriptions: Record<ResponseType, string> = {
     [ResponseType.INFO]: 'Alert',
     [ResponseType.ERROR]: 'Error',
 };
+
+export const TrueFalse = {
+    TRUE: true,
+    FALSE: false,
+}

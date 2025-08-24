@@ -5,6 +5,10 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
+import { OrganizationService } from '../../service/organization/organization.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ResponseType, TrueFalse } from '../../common-constants/enum-constants';
+import { CustomAlertComponent } from '../../common-components/custom-alert/custom-alert.component';
 
 
 @Component({
@@ -23,6 +27,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 })
 export class RegisterOrgComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
+  readonly dialog = inject(MatDialog);
 
   selectedStepIndex: number = 0;
   isLinear = false;
@@ -36,6 +41,8 @@ export class RegisterOrgComponent implements OnInit {
 
   payload_count: number | null = 0;
   payloads: string[] = [];
+
+  constructor(private organizationService: OrganizationService) { }
 
   ngOnInit() {
     this.setStepperOrientation();
@@ -89,5 +96,46 @@ export class RegisterOrgComponent implements OnInit {
     } else if (count < this.payloads.length) {
       this.payloads.splice(count);
     }
+  }
+
+  RegisterOrganization() {
+    const obj = {
+      org_name: this.org_name,
+      org_email: this.org_email,
+      application_count: this.application_count,
+      application_urls: this.applications,
+      payload_instance_count: this.payload_count,
+      payload_variables: this.payloads,
+    };
+
+
+    this.organizationService.DoRegisterOrganization(obj).subscribe({
+      next: async (response) => {
+        console.log("Org Registration", response);
+        if (response && response.success === TrueFalse.TRUE) {
+          this.OpenDialog(response.message, ResponseType.SUCCESS, false);
+        } else {
+          this.OpenDialog(response.message, ResponseType.ERROR, false);
+        }
+      },
+      error: (err) => {
+        this.OpenDialog(err.error.message ?? "Failed to process the request!", ResponseType.ERROR, false);
+      }
+    });
+  }
+
+  OpenDialog(dialogText: string, dialogType: string, pageReloadNeeded: boolean): void {
+    const dialogRef = this.dialog.open(CustomAlertComponent, {
+      width: '30rem',
+      height: 'max-content',
+      disableClose: true,
+      data: { text: dialogText, type: dialogType }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      if (pageReloadNeeded) {
+        window.location.reload();
+      }
+    });
   }
 }
