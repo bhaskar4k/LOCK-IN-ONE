@@ -116,7 +116,7 @@ export class RegisterOrgComponent implements OnInit {
     this.organizationService.DoRegisterOrganization(obj).subscribe({
       next: async (response) => {
         this.matProgressBarVisible = false;
-        
+
         if (response && response.success === TrueFalse.TRUE) {
           this.OpenDialog(response.message, ResponseType.SUCCESS, false);
         } else {
