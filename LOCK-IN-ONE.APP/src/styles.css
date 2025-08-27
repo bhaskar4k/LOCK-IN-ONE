@@ -17,13 +17,19 @@ body {
 /* For light theme: make navbar slightly darker */
 [data-bs-theme="light"] .navbar {
     background-color: #eaeaea !important;
-    /* a bit darker than default light body */
 }
 
-/* For dark theme: let Bootstrap default dark colors work */
 [data-bs-theme="dark"] .navbar {
     background-color: #1a1d22 !important;
-    /* lighter than default dark body */
+}
+
+/* For light theme: make menubar slightly darker */
+[data-bs-theme="light"] .sidebar  {
+    background-color: #eaeaea !important;
+}
+
+[data-bs-theme="dark"] .sidebar  {
+    background-color: #1a1d22 !important;
 }
 
 :root {

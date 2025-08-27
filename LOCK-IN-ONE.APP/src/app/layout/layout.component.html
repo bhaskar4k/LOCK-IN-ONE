@@ -20,7 +20,7 @@
         <mat-progress-bar mode="indeterminate" *ngIf="matProgressBarVisible" class="matProgressBar"></mat-progress-bar>
 
         <div class="d-flex flex-nowrap">
-            <div id="show_menu" class="bg-light border-end">
+            <div id="show_menu" class="sidebar">
                 <nav class="nav nav-pills flex-column gap-2 p-2">
                     <a *ngFor="let m of Menu" class="nav-link" [routerLink]="[m.menu_route]" routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }" (click)="selectedMenuId = m.menu_id">

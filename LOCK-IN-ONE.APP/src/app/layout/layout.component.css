@@ -43,7 +43,7 @@
   width: 250px;
   height: calc(100vh - 56px - 56px);
   /* 56px navbar + 56px footer */
-  background-color: #f8f9fa;
+  /* background-color: #f8f9fa; */
   transition: all 0.3s ease;
   overflow-y: auto;
 }
