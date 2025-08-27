@@ -78,21 +78,24 @@
   overflow-y: auto;
 }
 
-/*  Support me if you like it */
-.support {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-}
-
-.support a {
-  color: #292c35;
-  font-size: 32px;
-  backface-visibility: hidden;
+.custom-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
   display: inline-block;
-  transition: transform 0.2s ease;
 }
 
-.support a:hover {
-  transform: scale(1.1);
+.custom-link:visited {
+  color: #ffffff;
+}
+
+.custom-link:hover,
+.custom-link:focus {
+  color: #ffd900;
+  text-decoration: none;
+}
+
+.custom-link:active {
+  color: #ffd900;
 }
