@@ -39,14 +39,37 @@ export class LayoutComponent implements OnInit {
     const menuToggle = document.getElementById("menu_toggle");
     if (menuToggle) {
       menuToggle.addEventListener("click", () => {
-        console.log("HI")
         const menu = document.getElementById("show_menu");
         if (menu) {
-          menu.style.height = (menu.style.height === "0px") ? "1000px" : "0px";
+          menu.classList.toggle("collapsed");
         }
       });
     }
+
+    window.addEventListener('resize', this.AdjustMenuHeight);
+    window.addEventListener('load', this.AdjustMenuHeight);
   }
+
+  AdjustMenuHeight() {
+    const nav = document.querySelector('nav');      // Bootstrap nav selector
+    const footer = document.querySelector('footer');
+    const menu = document.getElementById('show_menu');
+    const router_outlet_body = document.getElementById('router_outlet_body');
+
+    if (menu && nav && footer && router_outlet_body) {
+      const navHeight = nav.offsetHeight;
+      const footerHeight = footer.offsetHeight;
+      menu.style.height = `calc(100vh - ${navHeight}px - ${footerHeight}px)`;
+      router_outlet_body.style.height = `calc(100vh - ${navHeight}px - ${footerHeight}px)`;
+
+      if (window.innerWidth <= 768) {
+        menu.style.top = `${navHeight}px`; // push below nav on mobile
+      } else {
+        menu.style.top = '0'; // default
+      }
+    }
+  }
+
 
   ToggleTheme() {
     this.IsDarkMode = !this.IsDarkMode;

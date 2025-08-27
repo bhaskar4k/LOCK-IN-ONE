@@ -39,37 +39,43 @@
   transform: translateX(24px);
 }
 
-.custom-link {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.custom-link:hover {
-  color: var(--warning);
-  text-decoration: none;
-}
-
 #show_menu {
-  position: absolute;
-  height: 0px;
-  overflow-y: hidden;
-  transition: 0.3s all ease-in-out;
-  width: 20rem;
-  z-index: 100;
-  max-height: max-content;
-  border-radius: 0.7rem;
+  width: 250px;
+  height: calc(100vh - 56px - 56px);
+  /* 56px navbar + 56px footer */
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  overflow-y: auto;
 }
 
-.active-menu {
-  background-color: #007bff !important;
-  color: white !important;
-  font-weight: bold;
+#show_menu.collapsed {
+  width: 0;
+  overflow: hidden;
 }
 
-.nav-link:hover {
-  background-color: #e9ecef;
+/* For mobile overlay behavior */
+@media (max-width: 768px) {
+  #show_menu {
+    position: fixed;
+    top: 56px;
+    /* height of navbar */
+    left: 0;
+    height: calc(100vh - 56px - 56px);
+    /* full height minus nav/footer */
+    width: 250px;
+    transform: translateX(0);
+    z-index: 1050;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  #show_menu.collapsed {
+    transform: translateX(-100%);
+  }
+}
+
+#router_outlet_body {
+  height: calc(100vh - 56px - 56px);
+  overflow-y: auto;
 }
 
 /*  Support me if you like it */
