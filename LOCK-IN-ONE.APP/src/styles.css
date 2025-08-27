@@ -13,8 +13,33 @@ body {
     height: 100vh;
 }
 
+[data-bs-theme="light"] {
+    --black: #000000;
+    --white: #ffffff;
+    --light: #f1f1f1;
+    --light1: #f8f8f8;
+    --success: #2abe05;
+    --failed: #fd0000;
+    --failed-hover: #bd0000;
+    --warning: #f1b100;
+    --light-blue: #5d009b;
+    --light-blue-hover: #8200d8;
+}
 
-/* For light theme: make navbar slightly darker */
+[data-bs-theme="dark"] {
+    --black: #000000;
+    --white: #ffffff;
+    --light: #f1f1f1;
+    --light1: #f8f8f8;
+    --success: #2abe05;
+    --failed: #ff523b;
+    --failed-hover: #ff1e00;
+    --warning: #f1b100;
+    --light-blue: #6264c4;
+    --light-blue-hover: #4b4cb8;
+}
+
+/* Navbar color overlap */
 [data-bs-theme="light"] .navbar {
     background-color: #eaeaea !important;
 }
@@ -23,24 +48,118 @@ body {
     background-color: #1a1d22 !important;
 }
 
-/* For light theme: make menubar slightly darker */
-[data-bs-theme="light"] .sidebar  {
+
+/* Sidebar menu item color overlap */
+[data-bs-theme="light"] .nav-link {
+    color: var(--light-blue) !important;
+}
+
+[data-bs-theme="dark"] .nav-link {
+    color: var(--white) !important;
+}
+
+.nav-link.active {
+  background-color: var(--light-blue) !important;
+  color: var(--white) !important;
+}
+
+
+/* Sidebar menu color overlap */
+[data-bs-theme="light"] .sidebar {
     background-color: #eaeaea !important;
 }
 
-[data-bs-theme="dark"] .sidebar  {
+[data-bs-theme="dark"] .sidebar {
     background-color: #1a1d22 !important;
 }
 
-:root {
-    --black: #000000;
-    --white: #ffffff;
-    --light: #f1f1f1;
-    --light1: #f8f8f8;
-    --success: #2abe05;
-    --failed: #fd0000;
-    --warning: #f1b100;
-    --light-blue: #007bff;
+
+/* bootstrap color overlap - Primary*/
+[data-bs-theme="light"] .btn-primary {
+    background-color: var(--light-blue) !important;
+}
+
+[data-bs-theme="dark"] .btn-primary {
+    background-color: var(--light-blue) !important;
+}
+
+[data-bs-theme="light"] .btn-primary:hover {
+    background-color: var(--light-blue-hover) !important;
+}
+
+[data-bs-theme="dark"] .btn-primary:hover {
+    background-color: var(--light-blue-hover) !important;
+}
+
+[data-bs-theme="light"] .bg-primary {
+    background-color: var(--light-blue) !important;
+}
+
+[data-bs-theme="dark"] .bg-primary {
+    background-color: var(--light-blue) !important;
+}
+
+[data-bs-theme="light"] .text-primary {
+    color: var(--light-blue) !important;
+}
+
+[data-bs-theme="dark"] .text-primary {
+    color: var(--light-blue) !important;
+}
+
+[data-bs-theme="light"] .border-primary {
+    border-color: var(--light-blue) !important;
+}
+
+[data-bs-theme="dark"] .border-primary {
+    border-color: var(--light-blue) !important;
+}
+
+
+/* bootstrap color overlap - Danger*/
+[data-bs-theme="light"] .btn-danger {
+    background-color: var(--failed) !important;
+}
+
+[data-bs-theme="dark"] .btn-danger {
+    background-color: var(--failed) !important;
+}
+
+[data-bs-theme="light"] .btn-danger:hover {
+    background-color: var(--failed-hover) !important;
+}
+
+[data-bs-theme="dark"] .btn-danger:hover {
+    background-color: var(--failed-hover) !important;
+}
+
+[data-bs-theme="light"] .bg-danger {
+    background-color: var(--failed) !important;
+}
+
+[data-bs-theme="dark"] .bg-danger {
+    background-color: var(--failed) !important;
+}
+
+[data-bs-theme="light"] .text-danger {
+    color: var(--failed) !important;
+}
+
+[data-bs-theme="dark"] .text-danger {
+    color: var(--failed) !important;
+}
+
+[data-bs-theme="light"] .border-danger {
+    border-color: var(--failed) !important;
+}
+
+[data-bs-theme="dark"] .border-danger {
+    border-color: var(--failed) !important;
+}
+
+
+.btn {
+    border: 0px !important;
 }
 
 .footer {
