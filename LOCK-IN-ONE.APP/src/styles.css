@@ -186,7 +186,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--white);
+    background: dark;
 }
 
 ::-webkit-scrollbar-thumb {
