@@ -1,16 +1,18 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
-import { provideAnimations } from '@angular/platform-browser/animations'; // ✅ Import this
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app/app.component';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-// import { authInterceptor } from './app/auth.interceptor';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { AuthInterceptor } from './app/middleware/auth-interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideAnimations(),
-    provideHttpClient(),
-    // provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([AuthInterceptor])
+    ),
     ...appConfig.providers
   ]
 }).catch((err) => console.error(err));

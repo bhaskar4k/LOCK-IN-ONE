@@ -6,7 +6,7 @@ import { AuthService } from '../service/auth/auth.service';
 import { CustomAlertComponent } from '../common-components/custom-alert/custom-alert.component';
 import { ResponseType } from '../common-constants/enum-constants';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
+export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const Token = authService.GetToken();
   const dialog = inject(MatDialog);
