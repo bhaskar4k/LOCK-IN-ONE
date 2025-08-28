@@ -22,7 +22,7 @@ function VerifyJwtToken(req, res, next) {
     const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) {
-       return res.status(HttpStatus.UNAUTHORIZED).json(new ErrorDTO("Access denied.<br>No token provided."));
+        return res.status(HttpStatus.UNAUTHORIZED).json(new ErrorDTO("Access denied.<br>No token provided."));
     }
 
     jwt.verify(token, GetJwtTokenEncryptionKey(JWT_SECRET), (err, user) => {
