@@ -9,7 +9,7 @@ import PasswordEncryption from '../utility/PasswordEncryption.js';
 const { encrypt, decrypt } = PasswordEncryption;
 
 import EncryptionKey from '../utility/EncryptionKey.js';
-const { GetOrganizationPasswordEncryptionKey, GetOrganizationJwtTokenEncryptionKey } = EncryptionKey;
+const { GetOrganizationPasswordEncryptionKey, GetJwtTokenEncryptionKey } = EncryptionKey;
 
 import Jwt from '../middleware/Jwt.js';
 const { GenerateJwtToken } = Jwt;
@@ -160,7 +160,7 @@ const Login = async (req, res) => {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("You've entered wrond password!"));
         }
 
-        const OrgJwtTokenEncryptionkey = GetOrganizationJwtTokenEncryptionKey(process.env.ENCRYPTION_KEY);
+        const OrgJwtTokenEncryptionkey = GetJwtTokenEncryptionKey(process.env.ENCRYPTION_KEY);
 
         const TokenPayload = {
             org_name: OrgExists.org_name,

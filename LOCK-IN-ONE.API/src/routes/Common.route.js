@@ -7,6 +7,6 @@ const { VerifyJwtToken } = JWT;
 const router = express.Router();
 
 
-router.get("/menu", Common.GetMenu);
+router.get("/menu", VerifyJwtToken, Common.GetMenu);
 
 export default router;
