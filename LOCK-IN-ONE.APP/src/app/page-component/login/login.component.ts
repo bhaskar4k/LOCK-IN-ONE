@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomAlertComponent } from '../../common-components/custom-alert/custom-alert.component';
-import { JWT_KEY, ResponseType, TrueFalse } from '../../common-constants/enum-constants';
+import { ResponseType, TrueFalse } from '../../common-constants/enum-constants';
 import { OrganizationService } from '../../service/organization/organization.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
 
   constructor(
     private organizationService: OrganizationService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -43,8 +45,9 @@ export class LoginComponent {
         this.matProgressBarVisible = false;
 
         if (response && response.success === TrueFalse.TRUE) {
-          localStorage.removeItem(JWT_KEY);
-          localStorage.setItem(JWT_KEY, JSON.stringify(response.data));
+          const Token = JSON.stringify(response.data);
+          this.authService.SaveToken(Token);
+          
           this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
         } else {
           this.OpenDialog(response.message, ResponseType.ERROR, null);
