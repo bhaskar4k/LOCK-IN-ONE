@@ -15,7 +15,20 @@ const GetMenu = async (req, res) => {
     try {
         const MenusData = await Menus.find({ data_status: DATA_STATUS.ACTIVE });
 
-        return res.status(HttpStatus.OK).json(new SuccessDTO("Menu fetched!", MenusData));
+        let Output = [];
+        MenusData.forEach(Menu => {
+            Output.push({
+                menu_id: Menu.menu_id,
+                menu_name: Menu.menu_name,
+                menu_route: Menu.menu_route,
+                parent_id: Menu.parent_id,
+                sequence: Menu.sequence
+            });
+        });
+
+        Output.sort((a, b) => a.sequence - b.sequence);
+
+        return res.status(HttpStatus.OK).json(new SuccessDTO("Menu fetched!", Output));
     } catch (error) {
         console.log(error);
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(new ErrorDTO());
