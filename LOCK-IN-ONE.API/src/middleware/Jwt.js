@@ -10,7 +10,7 @@ dotenv.config();
 
 const JWT_SECRET = process.env.ENCRYPTION_KEY;
 const JWT_ALGORITHM = process.env.JWT_ALGORITHM;
-const JWT_EXPIRE_TIME = process.env.ENCRYPTION_KEY;
+const JWT_EXPIRE_TIME = process.env.JWT_EXPIRE_TIME;
 
 function GenerateJwtToken(payload, key) {
     return jwt.sign(payload, key, {

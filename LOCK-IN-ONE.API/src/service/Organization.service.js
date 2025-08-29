@@ -148,6 +148,7 @@ const RegisterOrganization = async (req, res) => {
 const Login = async (req, res) => {
     try {
         const data = req.body;
+        console.log(data)
 
         const OrgPasswordEncryptionkey = GetOrganizationPasswordEncryptionKey(process.env.ENCRYPTION_KEY);
         
