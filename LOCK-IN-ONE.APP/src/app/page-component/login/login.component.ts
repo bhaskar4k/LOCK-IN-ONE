@@ -45,8 +45,7 @@ export class LoginComponent {
         this.matProgressBarVisible = false;
 
         if (response && response.success === TrueFalse.TRUE) {
-          const Token = JSON.stringify(response.data);
-          this.authService.SaveToken(Token);
+          this.authService.SaveToken(response.data);
           
           this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
         } else {

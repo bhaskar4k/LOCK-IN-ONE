@@ -22,8 +22,8 @@ export class AuthService {
   }
 
   SaveToken(Token: string) {
-    localStorage.removeItem(JWT_KEY);
-    localStorage.setItem(JWT_KEY, Token);
+    localStorage.removeItem(this.TokenKey);
+    localStorage.setItem(this.TokenKey, Token);
   }
 
   OpenDialog(dialogText: string, dialogType: number, doLogout: boolean): void {
