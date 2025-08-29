@@ -53,11 +53,29 @@ function AssignTokenExistance(req, res, next) {
 
     if (!token) {
         req.HasToken = false;
+        next();
     } else {
         req.HasToken = true;
-    }
 
-    next();
+        jwt.verify(
+            token,
+            GetJwtTokenEncryptionKey(JWT_SECRET),
+            {
+                algorithms: [JWT_ALGORITHM],
+                complete: false
+            },
+            (err, user) => {
+                if (err) {
+                    return res.status(HttpStatus.UNAUTHORIZED).json(
+                        new ErrorDTO("Access denied.<br>Invalid or expired token.")
+                    );
+                }
+
+                req.UserInformation = user;
+                next();
+            }
+        );
+    }
 }
 
 export default {
