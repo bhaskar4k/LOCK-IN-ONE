@@ -47,7 +47,21 @@ function VerifyJwtToken(req, res, next) {
     );
 }
 
+function AssignTokenExistance(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(" ")[1];
+
+    if (!token) {
+        req.HasToken = false;
+    } else {
+        req.HasToken = true;
+    }
+
+    next();
+}
+
 export default {
     GenerateJwtToken,
-    VerifyJwtToken
+    VerifyJwtToken,
+    AssignTokenExistance
 }
