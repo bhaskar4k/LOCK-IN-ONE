@@ -57,6 +57,17 @@ const SeedRoleMenuMapping = async () => {
                     });
                     break;
 
+                case "MENU005":
+                    // Map to SUPER_ADMIN, ADMIN, ORGANIZATION_ADMIN, ORGANIZATION_USER roles
+                    [USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN, USER_ROLE.ORGANIZATION_ADMIN, USER_ROLE.ORGANIZATION_USER].forEach(role => {
+                        roleMenuDocs.push({
+                            menu_id: menu.menu_id,
+                            role_id: role,
+                            data_status: DATA_STATUS.ACTIVE
+                        });
+                    });
+                    break;
+
                 default:
                     break;
             }

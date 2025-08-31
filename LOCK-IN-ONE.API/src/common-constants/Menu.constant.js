@@ -34,6 +34,14 @@ const MenusData = [
     sequence: 4,
     data_status: DATA_STATUS.ACTIVE
   },
+  {
+    menu_name: "Logout",
+    menu_route: "logout",
+    menu_id: "MENU005",
+    parent_id: "ROOT",
+    sequence: 5,
+    data_status: DATA_STATUS.ACTIVE
+  },
 ];
 
 export default MenusData;
