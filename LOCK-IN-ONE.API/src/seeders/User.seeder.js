@@ -5,9 +5,6 @@ import Payload from '../entity/Payload.model.js';
 import PasswordEncryption from '../utility/PasswordEncryption.js';
 const { encrypt } = PasswordEncryption;
 
-import EncryptionKey from '../utility/EncryptionKey.js';
-const { GetOrganizationPasswordEncryptionKey } = EncryptionKey;
-
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,13 +19,11 @@ const SeedUser = async () => {
             return;
         }
 
-        const key = GetOrganizationPasswordEncryptionKey(process.env.ENCRYPTION_KEY);
-
         const Obj = new Organization({
             org_name: process.env.DEFAULT_ORGANIZATION_NAME,
             org_guid: process.env.DEFAULT_ORGANIZATION_GUID,
             org_email: process.env.DEFAULT_ORGANIZATION_EMAIL,
-            org_password: encrypt(process.env.DEFAULT_ORGANIZATION_PASSWORD, key),
+            org_password: encrypt(process.env.DEFAULT_ORGANIZATION_PASSWORD),
             application_count: process.env.DEFAULT_ORGANIZATION_APPLICATION_COUNT,
             payload_instance_count: process.env.DEFAULT_ORGANIZATION_PAYLOAD_INSTANCE_COUNT,
         });

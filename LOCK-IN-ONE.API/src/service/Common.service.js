@@ -13,6 +13,13 @@ dotenv.config();
 
 const GetMenu = async (req, res) => {
     try {
+        // const authHeader = req.headers['authorization'];
+        // const token = authHeader && authHeader.split(" ")[1];
+
+        // if (!token) {
+        //     return res.status(HttpStatus.UNAUTHORIZED).json(new ErrorDTO("Access denied.<br>No token provided."));
+        // }
+
         const MenusData = await Menus.find({ data_status: DATA_STATUS.ACTIVE });
 
         let Output = [];

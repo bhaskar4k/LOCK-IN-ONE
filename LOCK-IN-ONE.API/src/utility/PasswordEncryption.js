@@ -1,9 +1,13 @@
 import crypto from 'crypto';
 
+import dotenv from 'dotenv';
+dotenv.config();
 
-function encrypt(text, encryptionKey) {
+const PASSWORD_ENCRYPTION_KEY = process.env.PASSWORD_ENCRYPTION_KEY;
+
+function encrypt(text) {
     const ALGORITHM = 'aes-256-gcm'; // AES with authentication
-    const SECRET_KEY = Buffer.from(encryptionKey, 'hex'); // 32 bytes hex
+    const SECRET_KEY = Buffer.from(PASSWORD_ENCRYPTION_KEY, 'hex'); // 32 bytes hex
     const IV_LENGTH = 16; // Initialization vector
 
     const iv = crypto.randomBytes(IV_LENGTH);
@@ -14,9 +18,9 @@ function encrypt(text, encryptionKey) {
     return `${iv.toString('hex')}:${authTag}:${encrypted}`;
 }
 
-function decrypt(encryptedData, encryptionKey) {
+function decrypt(encryptedData) {
     const ALGORITHM = 'aes-256-gcm'; // AES with authentication
-    const SECRET_KEY = Buffer.from(encryptionKey, 'hex'); // 32 bytes hex
+    const SECRET_KEY = Buffer.from(PASSWORD_ENCRYPTION_KEY, 'hex'); // 32 bytes hex
 
     const [ivHex, authTagHex, encrypted] = encryptedData.split(':');
     const iv = Buffer.from(ivHex, 'hex');

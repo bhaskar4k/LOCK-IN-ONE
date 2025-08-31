@@ -14,8 +14,17 @@ const TRUE_FALSE = {
     FALSE: false,
 }
 
+const USER_ROLE = {
+    SUPER_ADMIN: "SUPER_ADMIN",
+    ADMIN: "ADMIN",
+    ORGANIZATION_ADMIN: "ORGANIZATION_ADMIN",
+    ORGANIZATION_USER: "ORGANIZATION_USER",
+    COMMON: "COMMON"
+}
+
 export default {
     EnumConstantNames,
     DATA_STATUS,
-    TRUE_FALSE
+    TRUE_FALSE,
+    USER_ROLE
 }
