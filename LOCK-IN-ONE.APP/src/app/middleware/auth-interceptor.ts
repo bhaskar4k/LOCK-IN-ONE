@@ -17,7 +17,8 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedRequest).pipe(
     catchError((error) => {
-      if (error.status === 400 && error.error.status === 69) {
+      if (error.status === 401) {
+        authService.DeleteToken();
         const message = error?.error?.message || 'Unauthorized source of request.<br>Or<br>you do not have permission to access this resource.';
         openDialog(message, ResponseType.ERROR, 'login');
         return EMPTY;

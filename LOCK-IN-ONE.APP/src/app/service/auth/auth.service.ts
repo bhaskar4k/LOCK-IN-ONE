@@ -26,6 +26,10 @@ export class AuthService {
     localStorage.setItem(this.TokenKey, Token);
   }
 
+  DeleteToken() {
+    localStorage.removeItem(this.TokenKey);
+  }
+
   OpenDialog(dialogText: string, dialogType: number, doLogout: boolean): void {
     const dialogRef = this.dialog.open(CustomAlertComponent, {
       data: { text: dialogText, type: dialogType }
