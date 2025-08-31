@@ -9,7 +9,12 @@ const SeedEnum = async () => {
     try {
         console.log("Trying to seed enums!");
 
-        await Enums.deleteMany({});
+        const ItemCount = await Enums.countDocuments();
+
+        if (ItemCount > 0) {
+            console.log("Enums already seeded!\n");
+            return;
+        }
 
         const { EnumConstantNames, ...restEnums } = EnumsConstants;
 

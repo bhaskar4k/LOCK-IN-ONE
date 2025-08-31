@@ -22,9 +22,27 @@ const USER_ROLE = {
     COMMON: "COMMON"
 }
 
+const USER_ROLE_ID = {
+    SUPER_ADMIN: "ROLE001",
+    ADMIN: "ROLE002",
+    ORGANIZATION_ADMIN: "ROLE003",
+    ORGANIZATION_USER: "ROLE004",
+    COMMON: "ROLE005"
+}
+
+const USER_ROLE_DESCRIPTION = {
+    SUPER_ADMIN: "Super Admin",
+    ADMIN: "Admin",
+    ORGANIZATION_ADMIN: "Organization Admin",
+    ORGANIZATION_USER: "Organization User",
+    COMMON: "Common"
+}
+
 export default {
     EnumConstantNames,
     DATA_STATUS,
     TRUE_FALSE,
-    USER_ROLE
+    USER_ROLE,
+    USER_ROLE_ID,
+    USER_ROLE_DESCRIPTION
 }

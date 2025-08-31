@@ -5,9 +5,14 @@ const SeedMenu = async () => {
     try {
         console.log("Trying to seed menu!");
 
-        await Menus.deleteMany({});
+        const count = await Menus.countDocuments();
 
-        await Menus.insertMany(MenusConstants); 
+        if (count === 0) {
+            await Menus.insertMany(MenusConstants);
+        } else {
+            console.log("Menu already seeded!\n");
+            return;
+        }
 
         console.log(`Menu seeded successfully!\n`);
     } catch (error) {
