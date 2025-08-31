@@ -70,6 +70,7 @@ export class LoginComponent {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (redirect !== null) {
         this.router.navigate([redirect]);
+        window.location.reload();
       }
     });
   }
