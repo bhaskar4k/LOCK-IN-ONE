@@ -47,7 +47,7 @@ export class LoginComponent {
         if (response && response.success === TrueFalse.TRUE) {
           this.authService.SaveToken(response.data);
           
-          this.OpenDialog(response.message, ResponseType.SUCCESS, "home");
+          this.OpenDialog(response.message, ResponseType.SUCCESS, "/home");
         } else {
           this.OpenDialog(response.message, ResponseType.ERROR, null);
         }
@@ -69,8 +69,7 @@ export class LoginComponent {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (redirect !== null) {
-        this.router.navigate([redirect]);
-        window.location.reload();
+        window.location.href = redirect;
       }
     });
   }
