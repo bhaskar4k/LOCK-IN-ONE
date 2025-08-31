@@ -4,6 +4,7 @@ const { DATA_STATUS } = EnumsConstants;
 import HttpStatus from '../common-constants/HttpStatus.constant.js';
 
 import Menus from '../entity/Menu.model.js';
+import RoleMenuMappings from '../entity/RoleMenuMapping.model.js';
 
 import SuccessDTO from '../dto-class/SuccessDTO.js';
 import ErrorDTO from '../dto-class/ErrorDTO.js';
@@ -13,14 +14,23 @@ dotenv.config();
 
 const GetMenu = async (req, res) => {
     try {
-        // const authHeader = req.headers['authorization'];
-        // const token = authHeader && authHeader.split(" ")[1];
+        const mappings = await RoleMenuMappings.find(
+            {
+                role_id: req.UserInformation.user_role,
+                data_status: DATA_STATUS.ACTIVE
+            }
+        );
 
-        // if (!token) {
-        //     return res.status(HttpStatus.UNAUTHORIZED).json(new ErrorDTO("Access denied.<br>No token provided."));
-        // }
+        const menuIds = mappings.map(m => m.menu_id);
 
-        const MenusData = await Menus.find({ data_status: DATA_STATUS.ACTIVE });
+        if (menuIds.length === 0) return res.status(HttpStatus.OK).json(new SuccessDTO("Menu fetched!", []));
+
+        const MenusData = await Menus.find(
+            {
+                menu_id: { $in: menuIds },
+                data_status: DATA_STATUS.ACTIVE
+            }
+        ).sort({ sequence: 1 });
 
         let Output = [];
         MenusData.forEach(Menu => {
@@ -32,8 +42,6 @@ const GetMenu = async (req, res) => {
                 sequence: Menu.sequence
             });
         });
-
-        Output.sort((a, b) => a.sequence - b.sequence);
 
         return res.status(HttpStatus.OK).json(new SuccessDTO("Menu fetched!", Output));
     } catch (error) {
