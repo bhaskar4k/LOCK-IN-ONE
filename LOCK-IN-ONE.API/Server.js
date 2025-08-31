@@ -38,5 +38,5 @@ app.listen(PORT, async () => {
   InitializeRoutes(app);
   await RunSeeders();
 
-  console.log(`API Server is running...\nBaseURL -> http://localhost:${PORT}`);
+  console.log(`\nAPI Server is running...\n\nBaseURL -> http://localhost:${PORT}`);
 });
