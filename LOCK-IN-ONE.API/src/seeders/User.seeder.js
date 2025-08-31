@@ -18,7 +18,7 @@ const SeedUser = async () => {
         const Exists = await Organization.findOne({ org_guid: process.env.DEFAULT_ORGANIZATION_GUID });
 
         if (Exists) {
-            console.log("User already seeded!\n");
+            console.log("User already seeded. Skipping!\n");
             return;
         }
 

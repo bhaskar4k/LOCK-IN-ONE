@@ -11,7 +11,7 @@ const SeedRoleMenuMapping = async () => {
         const count = await RoleMenuMapping.countDocuments();
 
         if (count > 0) {
-            console.log("Role menu mapping already seeded!\n");
+            console.log("Role menu mapping already seeded. Skipping!\n");
             return;
         }
 

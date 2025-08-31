@@ -10,7 +10,7 @@ const SeedMenu = async () => {
         if (count === 0) {
             await Menus.insertMany(MenusConstants);
         } else {
-            console.log("Menu already seeded!\n");
+            console.log("Menu already seeded. Skipping!\n");
             return;
         }
 

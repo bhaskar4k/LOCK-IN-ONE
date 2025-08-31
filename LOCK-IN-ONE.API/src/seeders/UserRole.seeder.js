@@ -13,7 +13,7 @@ const SeedUserRole = async () => {
         if (count === 0) {
             await UserRoles.insertMany(UserRoleConstants);
         } else {
-            console.log("User roles already seeded!\n");
+            console.log("User roles already seeded. Skipping!\n");
             return;
         }
 

@@ -12,7 +12,7 @@ const SeedEnum = async () => {
         const ItemCount = await Enums.countDocuments();
 
         if (ItemCount > 0) {
-            console.log("Enums already seeded!\n");
+            console.log("Enums already seeded. Skipping!\n");
             return;
         }
 
