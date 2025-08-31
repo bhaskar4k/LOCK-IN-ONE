@@ -23,6 +23,10 @@ const organizationSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    user_role: {
+        type: String,
+        required: true
+    },
     application_count: {
         type: Number,
         required: true,

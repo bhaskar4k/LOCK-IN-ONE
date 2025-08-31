@@ -3,6 +3,7 @@ import Application from '../entity/Application.model.js';
 import Payload from '../entity/Payload.model.js';
 
 import EnumsConstants from '../common-constants/Enum.constant.js';
+const { USER_ROLE } = EnumsConstants;
 import HttpStatus from '../common-constants/HttpStatus.constant.js';
 
 import PasswordEncryption from '../utility/PasswordEncryption.js';
@@ -91,6 +92,7 @@ const RegisterOrganization = async (req, res) => {
             org_guid: new_org_guid,
             org_email: data.org_email,
             org_password: data.org_password,
+            user_role: USER_ROLE.ORGANIZATION_ADMIN,
             application_count: data.application_count,
             payload_instance_count: data.payload_instance_count,
         });
@@ -144,7 +146,7 @@ const RegisterOrganization = async (req, res) => {
 const Login = async (req, res) => {
     try {
         const data = req.body;
-        
+
         const OrgExists = await Organization.findOne({ org_email: data.email });
         if (!OrgExists) {
             return res.status(HttpStatus.BAD_REQUEST).json(new ErrorDTO("An organization with this email does not exist!"));

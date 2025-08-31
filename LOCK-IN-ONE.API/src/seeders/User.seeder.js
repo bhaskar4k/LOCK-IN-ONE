@@ -5,6 +5,9 @@ import Payload from '../entity/Payload.model.js';
 import PasswordEncryption from '../utility/PasswordEncryption.js';
 const { encrypt } = PasswordEncryption;
 
+import EnumsConstants from '../common-constants/Enum.constant.js';
+const { USER_ROLE } = EnumsConstants;
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -24,6 +27,7 @@ const SeedUser = async () => {
             org_guid: process.env.DEFAULT_ORGANIZATION_GUID,
             org_email: process.env.DEFAULT_ORGANIZATION_EMAIL,
             org_password: encrypt(process.env.DEFAULT_ORGANIZATION_PASSWORD),
+            user_role: USER_ROLE.ORGANIZATION_ADMIN,
             application_count: process.env.DEFAULT_ORGANIZATION_APPLICATION_COUNT,
             payload_instance_count: process.env.DEFAULT_ORGANIZATION_PAYLOAD_INSTANCE_COUNT,
         });
