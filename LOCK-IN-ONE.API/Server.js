@@ -35,7 +35,8 @@ app.use(cors(corsOptions));
 app.listen(PORT, async () => {
   clear();
   await ConnectDB();
-  await RunSeeders();
   InitializeRoutes(app);
-  console.log(`API Server is running at http://localhost:${PORT}`);
+  await RunSeeders();
+
+  console.log(`API Server is running...\nBaseURL -> http://localhost:${PORT}`);
 });

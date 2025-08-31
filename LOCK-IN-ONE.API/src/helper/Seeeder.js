@@ -8,10 +8,18 @@ dotenv.config();
 
 const RunSeeders = async () => {
     try {
+        console.log(`=========================================`);
+        console.log(`Master Data Seeding Started!            |`);
+        console.log(`=========================================\n`);
+
         await SeedEnum();
         await SeedMenu();
         await SeedUser();
         await SeedUserRole();
+
+        console.log(`=========================================`);
+        console.log(`Master Data Seeding Ended!              |`);
+        console.log(`=========================================\n`);
     } catch (error) {
         console.log("Seeder error:", error);
         process.exit(1);
