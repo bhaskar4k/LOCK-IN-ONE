@@ -29,7 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class RegisterOrgComponent implements OnInit {
   private _formBuilder = inject(FormBuilder);
-  matProgressBarVisible = false;
+  matProgressBarVisible = true;
   readonly dialog = inject(MatDialog);
 
   selectedStepIndex: number = 0;
