@@ -159,6 +159,7 @@ const Login = async (req, res) => {
         const TokenPayload = {
             org_name: OrgExists.org_name,
             org_email: encrypt(OrgExists.org_email),
+            user_role: OrgExists.user_role,
         }
 
         return res.status(HttpStatus.OK).json(new SuccessDTO("Login is successful!", GenerateJwtToken(TokenPayload)));

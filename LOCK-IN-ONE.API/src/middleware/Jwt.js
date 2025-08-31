@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken';
 import HttpStatus from '../common-constants/HttpStatus.constant.js';
 
+import EnumsConstants from '../common-constants/Enum.constant.js';
+const { USER_ROLE } = EnumsConstants;
+
 import ErrorDTO from '../dto-class/ErrorDTO.js';
 
 import dotenv from 'dotenv';
@@ -50,6 +53,11 @@ function AssignTokenExistance(req, res, next) {
     const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) {
+        const UserInformation = {
+            user_role: USER_ROLE.COMMON
+        };
+
+        req.UserInformation = UserInformation;
         req.HasToken = false;
         next();
     } else {
